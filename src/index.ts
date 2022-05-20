@@ -10,9 +10,13 @@ const getMarketPlaces = (mps: string[]) => {
   return ret
 }
 
+export const getMarketPlace = (mp: string) => {
+  return _marketPlaces[mp]
+}
+
 export type MarketPlaceType = {
-    name: string
-    meta: any
+  name: string
+  meta: any
 }
 const registerMarketPlace = (mp: MarketPlaceType) => {
   _marketPlaces[mp.name] = mp.meta
