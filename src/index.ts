@@ -1,7 +1,8 @@
 const _marketPlaces = {}
 
 export const Function = {
-  getItemPage: 'getItemPage'
+  getItemPage: 'getItemPage',
+  getHost: 'getHost'
 }
 
 export const getMarketPlaces = (mps?: string[]) => {
