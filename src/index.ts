@@ -1,6 +1,10 @@
 const _marketPlaces = {}
 
-const getMarketPlaces = (mps: string[]) => {
+export const Function = {
+  getItemPage: 'getItemPage'
+}
+
+export const getMarketPlaces = (mps?: string[]) => {
   if (!mps || mps.length === 0) return _marketPlaces
 
   const ret = {}
@@ -18,9 +22,23 @@ export type MarketPlaceType = {
   name: string
   meta: any
 }
-const registerMarketPlace = (mp: MarketPlaceType) => {
+export const registerMarketPlace = (mp: MarketPlaceType) => {
   _marketPlaces[mp.name] = mp.meta
 }
 
-export { getMarketPlaces, registerMarketPlace }
+export const invoke = async (mp: string, func: string, meta?: any) => {
+  if (!_marketPlaces[mp]) {
+    throw new Error('Marketplace not found.')
+  }
+  if (!_marketPlaces[mp][func]) {
+    throw new Error('Function not found.')
+  }
+  try {
+    const res = await _marketPlaces[mp][func](meta)
+    return res
+  } catch (e) {
+    throw e
+  }
+}
+
 export default _marketPlaces
